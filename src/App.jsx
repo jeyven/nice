@@ -1,35 +1,64 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+import { useLocalStorage } from "./useLocalStorage";
+import firstOner from "./assets/1.png";
+import secondOner from "./assets/2.png";
+import thirdOner from "./assets/3.png";
+import fourthOner from "./assets/4.png";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [count, setCount] = useState(0);
+  const [show, setShow] = useState(false);
+  const [total, setTotal] = useLocalStorage("jeyven", 0);
+  useEffect(() => {
+    setCount(total);
+  }, []);
+  useEffect(() => {
+    if (total !== count) {
+      setTotal(count);
+    }
+  }, [count]);
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+      <h1> Fortnite Vbucks tracker! </h1>
+      <h2>${count.toFixed(2)}</h2>
+
+      {show ? (
+        <div className="card-container">
+          <div
+            onClick={() => setCount((count) => count + 7.99)}
+            className="card"
+          >
+            <img src={firstOner} alt="$7.99" />
+          </div>
+          <div
+            onClick={() => setCount((count) => count + 19.99)}
+            className="card"
+          >
+            <img src={secondOner} alt="$19.99" />
+          </div>
+          <div
+            onClick={() => setCount((count) => count + 31.99)}
+            className="card"
+          >
+            <img src={thirdOner} alt="$31.99" />
+          </div>
+          <div
+            onClick={() => setCount((count) => count + 79.99)}
+            className="card"
+          >
+            <img src={fourthOner} alt="$79.99" />
+          </div>
+        </div>
+      ) : null}
+      <div className="button-container">
+        <button id="reset" onClick={() => setCount(0)}>
+          Reset
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+        <button onClick={() => setShow(true)}>Add a transaction</button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

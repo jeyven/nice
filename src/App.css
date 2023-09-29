@@ -33,10 +33,42 @@
   }
 }
 
+.card-container {
+  justify-content: center;
+  margin-bottom: 32px;
+  display: flex;
+  gap: 8px;
+}
+
+.card-container > div {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.card-container > div > img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
 .card {
   padding: 2em;
+  height: 320px;
+  width: 180px;
+  border: 1px solid gray;
 }
 
 .read-the-docs {
   color: #888;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.button-container > button {
+  margin-right: auto;
 }
